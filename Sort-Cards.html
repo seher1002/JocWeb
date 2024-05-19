@@ -3,123 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>War - Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            width: 150px;
-            height: 200px;
-            margin: 0 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-            background-color: white;
-            position: relative;
-        }
-
-        .card img {
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-        }
-
-        #result {
-            margin-top: 20px;
-            font-size: 24px;
-            color: #333;
-        }
-    </style>
+    <title>Sort Cards</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>Card Games</h1>
+        <nav>
+            <ul>
+                <li><a href="MainPage.html">About</a></li>
+                <li><a href="War-Game.html">War</a></li>
+                <li><a href="Sort-Cards.html">Sort Cards</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="container">
-        <h1>War - Game</h1>
-        <button onclick="play()">Play</button>
-        <div id="playerCard" class="card"></div>
-        <div id="computerCard" class="card"></div>
-        <div id="result"></div>
+        <h1>Sort Cards</h1>
+        <div id="cardsContainer"></div>
+        <button onclick="drawCard()">Draw a card</button>
     </div>
-
-    <script>
-        function play() {
-            fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-            .then(response => response.json())
-            .then(data => {
-                const deckId = data.deck_id;
-                fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
-                .then(response => response.json())
-                .then(data => {
-                    displayCards(data.cards);
-                    determineWinner(data.cards);
-                });
-            });
-        }
-
-        function displayCards(cards) {
-            const playerCard = document.getElementById('playerCard');
-            const computerCard = document.getElementById('computerCard');
-            playerCard.innerHTML = `<img src="${cards[0].image}" alt="Player's card">`;
-            computerCard.innerHTML = `<img src="${cards[1].image}" alt="Computer's card">`;
-        }
-
-        function determineWinner(cards) {
-            const playerValue = getValue(cards[0].value);
-            const computerValue = getValue(cards[1].value);
-
-            let resultText = '';
-            if (playerValue > computerValue) {
-                resultText = 'You win!';
-            } else if (playerValue < computerValue) {
-                resultText = 'Computer wins!';
-            } else {
-                resultText = 'It\'s a tie!';
-            }
-
-            const resultElement = document.getElementById('result');
-            resultElement.textContent = resultText;
-        }
-
-        function getValue(cardValue) {
-            if (cardValue === 'ACE') {
-                return 14;
-            } else if (cardValue === 'KING') {
-                return 13;
-            } else if (cardValue === 'QUEEN') {
-                return 12;
-            } else if (cardValue === 'JACK') {
-                return 11;
-            } else {
-                return parseInt(cardValue);
-            }
-        }
-    </script>
+    <script src="script.js" nonce=" "></script>
 </body>
 </html>
