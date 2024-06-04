@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sort Cards</title>
+    <title>Memory Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,11 +18,12 @@
             </ul>
         </nav>
     </header>
-    <div class="container">
-        <h1>Sort Cards</h1>
-        <div id="cardsContainer"></div>
-        <button onclick="drawCard()">Draw a card</button>
-    </div>
+    <main>
+        <h2>Memory Game</h2>
+        <button onclick="initializeMemoryGame()">Start New Game</button>
+        <div id="memoryBoard" class="memory-board"></div>
+        <div id="memoryResult"></div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
